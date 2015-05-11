@@ -1,0 +1,11 @@
+INSERT INTO COURSE VALUES (null ,'Project Management 101', 'management description', 'managementlinks', 'lecturer-a', 3, 1, 4, 'Select one', 'Select one', NULL , NULL, 1, 1);
+INSERT INTO COURSE VALUES (null ,'NET Technology', 'netdescription', 'netlinks', 'lecturer-a', 3, 2, 4, 'Select one', 'Select one', NULL, NULL, 1, 1);
+INSERT INTO USER VALUES (null ,'user-a', 'user-a.trcr2014@mail.ru', '123', 0);
+INSERT INTO USER VALUES (null ,'user-b' , 'user-b.trcr2014@mail.ru', '123', 0);
+INSERT INTO USER VALUES (null ,'user-c', 'user-c.trcr2014@mail.ru', '123', 0);
+INSERT INTO USER VALUES (null ,'lecturer-a', 'lecturer-a.trcr2014@mail.ru', '123', 1);
+INSERT INTO USER VALUES (null ,'lecturer-b', 'lecturer-b.trcr2014@mail.ru', '123', 1);
+INSERT INTO USER VALUES (null, 'km', 'km.trcr2014@mail.ru', '123', 3);
+INSERT INTO USER VALUES (null, 'dm', 'dm.trcr2014@mail.ru', '123', 2);
+INSERT INTO CATEGORY VALUES (null , 'Project Management');
+INSERT INTO CATEGORY VALUES (null ,'Development');

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+   
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+
+    
+    <mvc:annotation-driven/>
+
+   
+    <context:component-scan base-package="com.trainingcenter"/>
+
+    <bean id="viewNameTranslator" class="org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator"/>
+
+    <bean id="freemarkerConfigurer" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath">
+            <value>/WEB-INF/pages/freemarker/</value>
+        </property>
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="auto_import">spring.ftl as spring</prop>
+            </props>
+        </property>
+        
+        
+
+    </bean>
+
+   
+
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="cache" value="true"/>
+        <property name="prefix" value=""/>
+        <property name="suffix" value=".ftl"/>
+        <!--/**-->
+        <!--* Set the name of the RequestContext attribute for all views.-->
+        <!--* @param requestContextAttribute name of the RequestContext attribute-->
+        <!--* @see AbstractView#setRequestContextAttribute-->
+        <!--*/-->
+        <property name="requestContextAttribute" value="rc"/>
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        <property name="order" value="0" />
+    </bean>
+    
+    <bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/pages/jsp/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+		<property name="order" value="1" />
+	</bean>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/resources/**"/>
+            <bean class="com.trainingcenter.interceptor.AuthenticationInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.mail.ru"/>
+        <property name="port" value="587"/>
+        <property name="username" value="notification.trcr2014@mail.ru"/>
+        <property name="password" value="trcr123"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <import resource="hibernate-config.xml" />
+
+</beans>
